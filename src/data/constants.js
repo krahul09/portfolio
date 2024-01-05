@@ -5,7 +5,7 @@ export const Bio = {
     "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.",
   github: "https://github.com/krahul09",
   resume:
-    "https://drive.google.com/file/d/1yWvXbq1_CdXnBNzQ_GILlu_Qbwaudatk/view?usp=drive_link",
+    "https://drive.google.com/file/d/1jiTGrrIcl_RMR7GjgX-lSmLk-vDnLbFP/view?usp=drive_link",
   linkedin: "https://www.linkedin.com/in/rahul-kumar-068726199/",
   twitter: "https://twitter.com/raulk25__",
 };
@@ -95,7 +95,7 @@ export const skills = [
       {
         name: "Git",
         image:
-          "https://camo.githubusercontent.com/fbfcb9e3dc648adc93bef37c718db16c52f617ad055a26de6dc3c21865c3321d/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f6769742d73636d2f6769742d73636d2d69636f6e2e737667",
+          "https://res.cloudinary.com/practicaldev/image/fetch/s---Xg28U2u--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/q7uy4yxekcljpr70p2xk.png",
       },
       {
         name: "GitHub",
@@ -109,8 +109,10 @@ export const skills = [
       },
       {
         name: "Figma",
+        // image:
+        //   "https://cdn.dribbble.com/users/2653319/screenshots/6813714/figma_logo_animation.gif",
         image:
-          "https://camo.githubusercontent.com/ed93c2b000a76ceaad1503e7eb9356591b885227e82a36a005b9d3498b303ba5/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f6669676d612f6669676d612d69636f6e2e737667",
+          "https://i.pinimg.com/564x/18/f1/72/18f1727873924ba58fde1f739d11b77b.jpg",
       },
       {
         name: "Hoppscotch",
@@ -120,7 +122,7 @@ export const skills = [
       {
         name: "Postman",
         image:
-          "https://camo.githubusercontent.com/93b32389bf746009ca2370de7fe06c3b5146f4c99d99df65994f9ced0ba41685/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f676574706f73746d616e2f676574706f73746d616e2d69636f6e2e737667",
+          "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*QOx_tPV5wJnhTzAGhfIiLA.png",
       },
       {
         name: "Adobe XD",
