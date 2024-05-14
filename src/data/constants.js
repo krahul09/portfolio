@@ -5,7 +5,7 @@ export const Bio = {
     "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.",
   github: "https://github.com/krahul09",
   resume:
-    "https://drive.google.com/file/d/1RanefOxIofWKvd3BxWrPEKl8iXZAONcj/view?usp=drive_link",
+    "https://drive.google.com/file/d/1N7gl4dsmqLgDa7A3WnCvx557DvaRpFN5/view?usp=drive_link",
   linkedin: "https://www.linkedin.com/in/rahul-kumar-068726199/",
   twitter: "https://twitter.com/raulk25__",
 };
