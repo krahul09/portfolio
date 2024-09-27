@@ -5,7 +5,7 @@ export const Bio = {
     "I am a motivated and versatile individual, always eager to take on new challenges. With a passion for learning I am dedicated to delivering high-quality results. With a positive attitude and a growth mindset, I am ready to make a meaningful contribution and achieve great things.",
   github: "https://github.com/krahul09",
   resume:
-    "https://drive.google.com/file/d/1N7gl4dsmqLgDa7A3WnCvx557DvaRpFN5/view?usp=drive_link",
+    "https://drive.google.com/file/d/12LudtImUaHI74OJMWVYbWqeyf9nxospx/view?usp=drive_link",
   linkedin: "https://www.linkedin.com/in/rahul-kumar-068726199/",
   twitter: "https://twitter.com/raulk25__",
 };
@@ -136,11 +136,17 @@ export const skills = [
 export const experiences = [
   {
     id: 0,
-    img: "https://media.licdn.com/dms/image/D560BAQFKKOxcY9V8eQ/company-logo_200_200/0/1681700877053/talentmonksgp_logo?e=1710374400&v=beta&t=jWjtsm_Ou8db2XE9u409IkR9AEL8TRTob53lOHd6etY",
+    img: "https://talentmonk.com/wp-content/uploads/2024/02/Logo_Horizontal_with_tagline_1.svg",
     role: "Front-End Developer",
     company: "Talent Monk",
-    date: "Jul 2023 - Dec 2023",
-    desc: "• Utilized my expertise as a Frontend Developer with proficiency in technologies such as ReactJS , Redux , tailwind CSS and others to implement interactive surveys, user‑friendly forms, and post modules. This contributed significantly to enhancing user engage‑ment and streamlining data collection processes.",
+    date: "Jul 2023 - Jan 2024",
+    desc: [
+      "• Engineered and optimized dynamic surveys and forms using ReactJS, enhancing product translation efficiency andreducing load times by 40%, leading to a 25% increase in user engagement.",
+
+      "• Ensured robust cross-browser compatibility and fluid responsive layouts by implementing mobile-first design principlesand reducing redundant HTTP requests through meticulous prototyping.",
+
+      "• Collaborated closely with designers and product managers to deliver high-quality, interactive user interfaces with seamless integration of front-end technologies.",
+    ],
     skills: [
       "HTML",
       "CSS",
@@ -153,20 +159,26 @@ export const experiences = [
   },
   {
     id: 1,
-    img: "https://media.licdn.com/dms/image/D560BAQEfN3cBTUKHmg/company-logo_200_200/0/1687544906714/mlearningintelligence_logo?e=1710374400&v=beta&t=UEXLGYkv71KNGsM2-rcjIRouHczY8RG6YkaS8K050cA",
+    img: "https://media.licdn.com/dms/image/v2/D560BAQEfN3cBTUKHmg/company-logo_200_200/company-logo_200_200/0/1687544906714/mlearningintelligence_logo?e=1735776000&v=beta&t=RrfBHeQPYk2CLqm5IDsmHa0GtS3nvCAJofpQjQmDlZI",
     role: "Front-End Developer (Freelance)",
     company: "Machine Learning Intelligence",
     date: "Dec 2022 - May 2023",
-    desc: "• Developed and designed user‑friendly interfaces using Angular, TypeScript ensuring seamless user interactions and efficient data visualization. Integrated front end with GraphQL, handling queries and mutations to efficiently fetch and update real‑time market data.",
-    skills: ["TypeScript", "Angular", "Bootstrap", "GraphQL"],
+    desc: [
+      "• Developed and maintained sophisticated user interfaces using ReactJS and JavaScript, integrating GraphQL for real-time data handling, which significantly improved user interaction and data security.",
+
+      "• Delivered high-performance, accessible web applications by testing, deploying, and collaborating across teams to meet stringent design and functionality requirements.",
+    ],
+    skills: ["JavaScript", "ReactJs", "TailwindCss", "GraphQL"],
   },
   {
     id: 2,
-    img: "https://media.licdn.com/dms/image/C4E0BAQHmdC9IposUjw/company-logo_200_200/0/1630643654750?e=1710374400&v=beta&t=C2wIgNXF1NFHZn63sGoD99qJ5hGZzfV-mE7N69bAN9c",
+    img: "https://helpymoto.com/static/media/Logo.4f4532f2a44c42924f12.png",
     role: "Front-End Developer (Intern)",
     company: "Helpy Moto",
     date: "Mar 2022 - Dec 2022",
-    desc: "• Collaborated with the team to build the initial stage of the application, Utilized technologies such as ReactJS, Figma , Material UI , Redux",
+    desc: [
+      "• Spearheaded the redesign and implementation of a scalable application using ReactJS, TailwindCSS, and Redux, resulting in an enhanced user interface and seamless front-end and back-end integration.",
+    ],
     skills: [
       "HTML",
       "CSS",
@@ -179,16 +191,20 @@ export const experiences = [
   },
   {
     id: 3,
-    img: "https://media.licdn.com/dms/image/C510BAQHS-o4ahqf3Vw/company-logo_200_200/0/1630613500649/minzor_logo?e=1710374400&v=beta&t=DHWnqmRigSgrXIHfbg2shHdhcQ8sbzNqzg73AyFqAgU",
+    img: "https://media.licdn.com/dms/image/v2/C510BAQHS-o4ahqf3Vw/company-logo_200_200/company-logo_200_200/0/1630613500649/minzor_logo?e=1735776000&v=beta&t=ONvDHsaEFj7LV-FAZkCAQ5aTMthwPVAw-92_fR8lmyY",
     role: "Web Developer",
     company: "Minzor Private Limited",
     date: "Jan 2021 - Jun 2021",
-    desc: "• Worked on impactful projects like Fit Bharat Family and Thecodingbus. Worked with WordPress technology. • Fit Bharat Family campaign impacted and reached 10-20k people nationwide. • Thecodingbus assists users in finding coding resources, learning paths, and has been used by 1-2L people and growing..",
+    desc: [
+      "• Worked on impactful projects like Fit Bharat Family and Thecodingbus. Worked with WordPress technology.",
+
+      "• Fit Bharat Family campaign impacted and reached 10-20k people nationwide. • Thecodingbus assists users in finding coding resources, learning paths, and has been used by 1-2L people and growing..",
+    ],
     skills: ["Word Press"],
   },
   {
     id: 4,
-    img: "https://media.licdn.com/dms/image/C560BAQHTvZwCx4p2Qg/company-logo_200_200/0/1630640869849/amazon_logo?e=1710374400&v=beta&t=trMtkPXcjySzk3rBJ6b1CdjkpLv2TWyViO-PjRHo9Lk",
+    img: "https://amazon-blogs-brightspot-lower.s3.amazonaws.com/about/00/92/0260aab44ee8a2faeafde18ee1da/amazon-logo-inverse.svg",
     role: "Quality Analyst (Non-Tech)",
     company: "Amazon",
     date: "Dec 2021 - June 2023",
@@ -267,15 +283,7 @@ export const projects = [
       "• Web-based music player with pre-set music selection for easy playback.",
     image:
       "https://user-images.githubusercontent.com/81851334/289255265-1aa1e8b4-cf5f-4685-b1f9-52bf6eb78009.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDIxMTE2NjEsIm5iZiI6MTcwMjExMTM2MSwicGF0aCI6Ii84MTg1MTMzNC8yODkyNTUyNjUtMWFhMWU4YjQtY2Y1Zi00Njg1LWIxZjktNTJiZjZlYjc4MDA5LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMDklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjA5VDA4NDI0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQxM2Y0MDY0ZDZkNTJhNTJjY2E2Y2YwNWQ1OGM2YWE2Y2E2ZDkxMDY0ZTMxMWY3NWExMTRhMDJkYTUyMGExMjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.eMJSyNPTDcEG_Z54vaeb7MtRM7uVYajXv9rnCFzkzCA",
-    tags: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "ReactJs",
-      "Material UI ,",
-      "Rapid API",
-      "Redux",
-    ],
+    tags: ["HTML", "CSS", "JavaScript", "ReactJs"],
     github: "https://github.com/krahul09/Music-Player",
     webapp: "https://music-player-nine-psi.vercel.app/",
   },

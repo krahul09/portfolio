@@ -24,13 +24,10 @@ const Description = styled.div`
   }
 `;
 
-const Span = styled.span`
-  overflow: hidden;
-  display: -webkit-box;
-  max-width: 100%;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+const DescItem = styled.p`
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
 `;
 
 const Card = styled.div`
@@ -57,11 +54,6 @@ const Card = styled.div`
 
   &:hover ${Document} {
     display: flex;
-  }
-
-  &:hover ${Span} {
-    overflow: visible;
-    -webkit-line-clamp: unset;
   }
 
   border: 0.1px solid #306ee8;
@@ -151,7 +143,13 @@ const ExperienceCard = ({ experience }) => {
         </Body>
       </Top>
       <Description>
-        {experience?.desc && <Span>{experience?.desc}</Span>}
+        {Array.isArray(experience.desc) && (
+          <>
+            {experience.desc.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
+          </>
+        )}
         {experience?.skills && (
           <>
             <br />
@@ -159,7 +157,7 @@ const ExperienceCard = ({ experience }) => {
               <b>Skills:</b>
               <ItemWrapper>
                 {experience?.skills?.map((skill, index) => (
-                  <Skill>• {skill}</Skill>
+                  <Skill key={index}>• {skill}</Skill>
                 ))}
               </ItemWrapper>
             </Skills>
@@ -174,5 +172,4 @@ const ExperienceCard = ({ experience }) => {
     </Card>
   );
 };
-
 export default ExperienceCard;
