@@ -3,21 +3,12 @@
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { useWorkspaceTabs } from "@/hooks/use-workspace-tabs";
-import dynamic from "next/dynamic";
 import { Explorer } from "./explorer";
 import { StatusBar } from "./status-bar";
 import { TabBar } from "./tab-bar";
 import { TitleBar } from "./title-bar";
 
-/**
- * The intro reads sessionStorage to decide whether to play, which the server
- * cannot know. Rendering it client-only avoids a hydration mismatch and keeps
- * its code out of the initial HTML payload entirely.
- */
-const BootScreen = dynamic(
-  () => import("@/components/boot/boot-screen").then((m) => m.BootScreen),
-  { ssr: false },
-);
+import { BootScreen } from "@/components/boot/boot-screen";
 
 /**
  * The persistent editor chrome.

@@ -206,3 +206,19 @@
     transform: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Boot overlay visibility
+   The intro markup is server-rendered so it paints on the first frame, but it
+   must only appear for sessions that have not seen it. That decision needs
+   sessionStorage, which the server cannot read - so a blocking script in
+   <head> sets `data-booting` before anything paints, and this rule reveals it.
+   No JavaScript, no attribute, no overlay: the portfolio shows immediately.
+   -------------------------------------------------------------------------- */
+.boot-overlay {
+  display: none;
+}
+
+:root[data-booting] .boot-overlay {
+  display: grid;
+}

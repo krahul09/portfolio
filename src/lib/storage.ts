@@ -62,3 +62,13 @@ export const storageKeys = {
   openTabs: "portfolio:open-tabs",
   bootSeen: "portfolio:boot-seen",
 } as const;
+
+/**
+ * Marks a page load that should play the intro.
+ *
+ * Set on <html> by a blocking script in the document head - the only code that
+ * runs before the browser's first paint - and read by CSS to show the overlay
+ * on that very first frame. Without it the intro cannot mount until React has
+ * hydrated, by which time the workspace has already been painted.
+ */
+export const bootingAttribute = "data-booting";

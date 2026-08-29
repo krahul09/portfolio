@@ -5,7 +5,7 @@ import { bootSequence } from "@/data/boot-sequence";
 import { usePrefersReducedMotion } from "@/hooks/use-prefers-reduced-motion";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { bootCompleted, selectHasBooted } from "@/store/workspace-slice";
-import { readStorage, storageKeys, writeStorage } from "@/lib/storage";
+import { bootingAttribute, storageKeys, writeStorage } from "@/lib/storage";
 import { cn } from "@/lib/cn";
 import { BootLine, type RenderedLine } from "./boot-line";
 
@@ -59,48 +59,58 @@ const completedLines: RenderedLine[] = buildCompletedLines();
 /**
  * Terminal boot animation, shown once per browser session.
  *
- * Loaded with `ssr: false` (see WorkspaceShell), which is what makes the lazy
- * `useState` initialiser below safe: it reads sessionStorage, which only exists
- * on the client and would otherwise cause a hydration mismatch.
+ * Server-rendered, and deliberately so. Whether it plays is decided by CSS via
+ * the `data-booting` attribute that a blocking script in <head> sets before the
+ * first paint (see `layout.tsx`). That is what removes the flash of the
+ * workspace: if the overlay only mounted after hydration — as it did when this
+ * was a client-only component — the portfolio underneath would already have
+ * been painted.
  *
- * It renders *over* the workspace rather than replacing it, so the real page is
- * already in the DOM while the animation plays. Skippable by click or keypress —
- * an intro nobody can dismiss is a bug, not a flourish.
+ * React therefore never decides *visibility*; it only fills in the animated
+ * lines afterwards and clears the attribute when the sequence ends. Server and
+ * client both render the same empty terminal, so there is no hydration
+ * mismatch and no sessionStorage read during render.
  */
 export function BootScreen() {
   const dispatch = useAppDispatch();
   const hasBooted = useAppSelector(selectHasBooted);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Already seen this session? Then never show it at all.
-  const [shouldPlay] = useState(
-    () => readStorage(storageKeys.bootSeen, "session") !== "1",
-  );
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [lines, setLines] = useState<RenderedLine[]>([]);
 
   const finish = useCallback(() => {
     writeStorage(storageKeys.bootSeen, "1", "session");
     setIsFadingOut(true);
-    window.setTimeout(() => dispatch(bootCompleted()), timing.fadeOutMs);
+    window.setTimeout(() => {
+      // Clearing the attribute hides the overlay via CSS; unmounting then
+      // removes it from the DOM. Both, so neither ordering can flash.
+      document.documentElement.removeAttribute(bootingAttribute);
+      dispatch(bootCompleted());
+    }, timing.fadeOutMs);
   }, [dispatch]);
 
-  // Dispatching to Redux is not React state, so this does not trigger the
-  // cascading-render problem that a setState here would.
+  // Sessions that have already seen the intro never had the attribute set, so
+  // the overlay was never visible - just unmount it. Dispatching to Redux is
+  // not React state, so this does not cause a cascading render.
   useEffect(() => {
-    if (!shouldPlay) dispatch(bootCompleted());
-  }, [shouldPlay, dispatch]);
+    if (!document.documentElement.hasAttribute(bootingAttribute)) {
+      dispatch(bootCompleted());
+    }
+  }, [dispatch]);
 
   // Any keypress skips — the classic "press any key" affordance.
   useEffect(() => {
-    if (!shouldPlay || hasBooted) return;
+    if (hasBooted) return;
     const onKeyDown = () => finish();
     window.addEventListener("keydown", onKeyDown, { once: true });
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [shouldPlay, hasBooted, finish]);
+  }, [hasBooted, finish]);
 
   useEffect(() => {
-    if (!shouldPlay || hasBooted) return;
+    if (hasBooted) return;
+    // The pre-paint script decides whether this session plays the intro.
+    if (!document.documentElement.hasAttribute(bootingAttribute)) return;
 
     // Reduced motion renders the finished output directly (see `visibleLines`
     // below) rather than animating to it, so no state is written here.
@@ -205,16 +215,17 @@ export function BootScreen() {
       cancelled = true;
       timers.forEach(window.clearTimeout);
     };
-  }, [shouldPlay, hasBooted, prefersReducedMotion, finish]);
+  }, [hasBooted, prefersReducedMotion, finish]);
 
-  if (!shouldPlay || hasBooted) return null;
+  if (hasBooted) return null;
 
   const visibleLines = prefersReducedMotion ? completedLines : lines;
 
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 grid place-items-center bg-[#05070a] px-4",
+        // `boot-overlay` carries the display rule - see globals.css.
+        "boot-overlay fixed inset-0 z-50 place-items-center bg-[#05070a] px-4",
         "transition-opacity duration-500",
         isFadingOut ? "pointer-events-none opacity-0" : "opacity-100",
       )}

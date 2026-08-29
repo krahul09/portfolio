@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { profile, siteUrl } from "@/data/profile";
+import { bootingAttribute, storageKeys } from "@/lib/storage";
 import { StoreProvider } from "@/store/store-provider";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { PersonJsonLd } from "@/components/seo/person-json-ld";
@@ -23,6 +24,25 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
   variable: "--font-space-grotesk",
 });
+
+/**
+ * Runs before the browser's first paint.
+ *
+ * This is the whole trick behind having no flash of the workspace: the server
+ * cannot know whether this session has already seen the intro (that lives in
+ * sessionStorage), and a React component cannot mount until hydration - long
+ * after the first frame is on screen. A tiny synchronous script in <head> is
+ * the only code that runs early enough, so it sets an attribute that CSS then
+ * uses to reveal the already-server-rendered overlay on frame one.
+ *
+ * Wrapped in try/catch because sessionStorage throws in some privacy modes;
+ * failing here simply means no intro, which is a fine outcome.
+ */
+const bootFlagScript = `try{if(sessionStorage.getItem(${JSON.stringify(
+  storageKeys.bootSeen,
+)})!=="1"){document.documentElement.setAttribute(${JSON.stringify(
+  bootingAttribute,
+)},"")}}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -82,6 +102,9 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootFlagScript }} />
+      </head>
       <body className="antialiased">
         <a
           href="#content"
