@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+/* --------------------------------------------------------------------------
+   Design tokens
+   In Tailwind v4 the theme *is* CSS. Every custom property declared here
+   generates matching utilities: `--color-mint` gives `text-mint`, `bg-mint`,
+   `border-mint`, and so on. One place to retune the whole palette.
+   -------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces, darkest to lightest */
+  --color-surface-base: #0a0d13;
+  --color-surface-raised: #10141c;
+  --color-surface-overlay: #161b24;
+
+  /* Dividers */
+  --color-line: #232935;
+  --color-line-soft: #1b212b;
+
+  /* Text, in descending emphasis */
+  --color-ink: #e6e8eb;
+  --color-ink-muted: #9aa4b5;
+  /* AA-compliant against all three surfaces (5.14:1). The original
+     #5b6472 measured 2.89:1 - below the 4.5:1 minimum for body text. */
+  --color-ink-faint: #828d9e;
+
+  /* Syntax accents, borrowed from the editor theme this UI imitates */
+  --color-mint: #5eead4;
+  --color-amber: #f5a623;
+  --color-blue: #82aaff;
+  --color-purple: #c792ea;
+  --color-lime: #a3e635;
+  --color-pink: #f07178;
+
+  /* Typography — the variables come from next/font in layout.tsx */
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  /* An extra-small breakpoint for the status bar, below Tailwind's `sm`. */
+  --breakpoint-xs: 30rem;
+
+  /* Motion */
+  --animate-caret: caret 1s steps(1) infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-value-flash: value-flash 0.9s ease-out;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-mint) 55%, transparent);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-mint) 0%, transparent);
+  }
+}
+
+@keyframes value-flash {
+  0% {
+    color: var(--color-mint);
+    transform: translateY(-2px);
+  }
+  100% {
+    color: inherit;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Base layer
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    color-scheme: dark;
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface-base);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-feature-settings: "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* A single visible, consistent focus ring for every interactive element.
+     Focus is never removed - only made to appear for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--color-mint);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-mint) 30%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Editor-style scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-line);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-ink-faint);
+  }
+
+  /* Honour the OS setting instead of animating regardless. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reusable utilities
+   -------------------------------------------------------------------------- */
+
+/* Scroll-in reveal. The transition lives here so the `Reveal` component only
+   has to toggle a single class. */
+@utility reveal-hidden {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+@utility reveal-shown {
+  opacity: 1;
+  transform: none;
+}
+
+@utility reveal-base {
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Hides content visually while leaving it available to screen readers. */
+@utility sr-only-focusable {
+  &:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Pane enter transition, keyed on the route in WorkspaceShell. */
+@keyframes pane-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-in {
+  animation: pane-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Without JavaScript the reveal observer never fires, so the "hidden" start
+   state would strand real content at opacity 0. `scripting: none` lets CSS
+   alone opt out of the animation entirely. */
+@media (scripting: none) {
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}

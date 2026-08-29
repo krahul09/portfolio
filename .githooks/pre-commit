@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Block Markdown files from entering a commit.
+#
+# .gitignore alone is not enough: it does not apply to files that are already
+# tracked, and `git add -f` bypasses it entirely. This is the backstop.
+#
+# Deletions are allowed through (--diff-filter=d excludes them), so removing a
+# Markdown file that is already in history still works.
+
+staged_markdown=$(
+  git diff --cached --name-only --diff-filter=d |
+    grep -Ei '\.(md|mdx|markdown)$'
+)
+
+if [ -n "$staged_markdown" ]; then
+  echo "✖ commit blocked — Markdown files are not committed in this repo:"
+  echo "$staged_markdown" | sed 's/^/    /'
+  echo
+  echo "  Unstage them with:"
+  echo "    git restore --staged $(echo "$staged_markdown" | tr '\n' ' ')"
+  echo
+  echo "  To override for one commit (rarely what you want):"
+  echo "    git commit --no-verify"
+  exit 1
+fi
+
+exit 0
