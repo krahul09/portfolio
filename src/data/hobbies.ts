@@ -13,26 +13,18 @@ export const chess = {
 
 export const footballClubs: readonly FootballClub[] = [
   {
-    code: "RM",
+    id: "real-madrid",
     name: "Real Madrid",
     founded: 1902,
-    colors: {
-      top: "#1c2b4a",
-      bottom: "#0a0e18",
-      trim: "#f5d47a",
-      text: "#f5d47a",
-    },
+    crest: "/crests/real-madrid.svg",
+    accent: "#febe10",
   },
   {
-    code: "MU",
+    id: "manchester-united",
     name: "Manchester United",
     founded: 1878,
-    colors: {
-      top: "#da291c",
-      bottom: "#560d08",
-      trim: "#f5d47a",
-      text: "#ffffff",
-    },
+    crest: "/crests/manchester-united.svg",
+    accent: "#da291c",
   },
 ];
 

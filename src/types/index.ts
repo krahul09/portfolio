@@ -71,15 +71,13 @@ export interface SocialLink {
 }
 
 export interface FootballClub {
-  readonly code: string;
+  readonly id: string;
   readonly name: string;
   readonly founded: number;
-  readonly colors: {
-    readonly top: string;
-    readonly bottom: string;
-    readonly trim: string;
-    readonly text: string;
-  };
+  /** Path to the club's official crest under `public/`. */
+  readonly crest: string;
+  /** Accent colour used for the card's hover state. */
+  readonly accent: string;
 }
 
 export interface Interest {

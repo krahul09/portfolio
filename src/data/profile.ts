@@ -6,8 +6,8 @@ export const siteUrl = "https://rahulkumar.dev";
 export const profile = {
   name: "Rahul Kumar",
   firstName: "Rahul",
-  headline: "Frontend Software Engineer & Founding Engineer",
-  roles: ["Founding Engineer", "Frontend Architect", "AI / LLM Systems Engineer"],
+  headline: "Frontend Software Engineer",
+  roles: ["Founding Engineer", "Frontend Architect", "Software Engineer", "AI / LLM Systems Engineer"],
   location: "Gurugram, India",
   locality: "Gurugram",
   region: "Haryana",

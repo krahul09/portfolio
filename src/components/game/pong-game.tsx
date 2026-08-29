@@ -39,23 +39,33 @@ export function PongGame() {
   return (
     <section
       aria-label="Pong"
-      className="border-line-soft bg-surface-raised flex flex-col rounded-lg border p-4"
+      className="border-line-soft bg-surface-raised flex h-full flex-col rounded-xl border p-5"
     >
-      <header className="text-ink-muted mb-3 flex items-center justify-between text-[11px]">
-        <span className="flex items-center gap-1.5">
-          <Gamepad2 size={14} aria-hidden="true" />
-          score:{" "}
-          <span aria-live="polite" className="text-mint tabular-nums">
-            {score}
+      <header className="mb-4 flex items-center justify-between gap-4">
+        <h2 className="text-ink font-display text-[13px] font-semibold">rally.tsx</h2>
+
+        <div className="flex items-center gap-4 text-[11px]">
+          <span className="text-ink-muted flex items-center gap-1.5">
+            <Gamepad2 size={14} aria-hidden="true" />
+            score
+            <span aria-live="polite" className="text-mint tabular-nums">
+              {score}
+            </span>
           </span>
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Trophy size={13} aria-hidden="true" />
-          best: <span className="text-amber tabular-nums">{bestScore}</span>
-        </span>
+          <span className="text-ink-muted flex items-center gap-1.5">
+            <Trophy size={13} aria-hidden="true" />
+            best
+            <span className="text-amber tabular-nums">{bestScore}</span>
+          </span>
+        </div>
       </header>
 
-      <div className="border-line-soft bg-surface-base relative h-64 overflow-hidden rounded-md border sm:h-72">
+      {/*
+        `flex-1` with a minimum: the board grows to match the hobbies card
+        beside it on wide screens, instead of leaving a gap under a fixed
+        height, but never collapses on short ones.
+      */}
+      <div className="border-line-soft bg-surface-base relative min-h-[19rem] flex-1 overflow-hidden rounded-lg border">
         <PongCanvas
           isRunning={phase === "playing"}
           roundKey={round}
@@ -66,12 +76,12 @@ export function PongGame() {
         {phase !== "playing" && (
           <div className="bg-surface-base/85 absolute inset-0 grid place-items-center px-6 text-center backdrop-blur-[2px]">
             <div>
-              <p className="font-display text-ink text-lg font-semibold">
-                {phase === "idle" ? "rally.tsx" : "game over"}
+              <p className="text-ink font-display text-lg font-semibold">
+                {phase === "idle" ? "fancy a rally?" : "game over"}
               </p>
-              <p className="text-ink-muted mx-auto mt-1.5 max-w-xs text-[12px] leading-5">
+              <p className="text-ink-muted mx-auto mt-2 max-w-[17rem] text-[12px] leading-5">
                 {phase === "idle"
-                  ? "Move the paddle with your mouse, a touch drag, or the arrow keys — keep the ball alive."
+                  ? "Mouse, touch drag, or arrow keys — keep the ball alive."
                   : `You scored ${score}. Personal best is ${bestScore}.`}
               </p>
               <button
@@ -91,7 +101,7 @@ export function PongGame() {
         )}
       </div>
 
-      <p className="text-ink-faint mt-2.5 text-center text-[10px]">
+      <p className="text-ink-faint mt-3 text-center text-[10px]">
         click the board, then ← → to move
       </p>
     </section>

@@ -1,20 +1,39 @@
 import type { FileKind, PaneId, WorkspaceFile } from "@/types";
 
 /**
+ * The landing route.
+ *
+ * A deliberate choice: visitors rarely close tabs, so a playground reachable
+ * only by emptying the tab bar was effectively undiscoverable. Opening here
+ * puts it in front of everyone, and the pane itself points at about.tsx for
+ * anyone who wants the resume.
+ */
+export const playgroundFile: WorkspaceFile = {
+  id: "playground",
+  label: "rally.tsx",
+  kind: "tsx",
+  href: "/",
+  title: "Rahul Kumar — Frontend Software Engineer",
+  description:
+    "The workspace of Rahul Kumar, Frontend Software Engineer and Founding Engineer. Play a rally, then open about.tsx.",
+};
+
+/**
  * The workspace file tree. This single array drives:
  *  - the explorer sidebar
  *  - the tab bar
- *  - `generateStaticParams`-style route metadata
+ *  - per-route metadata
  *  - the sitemap
  *
  * Adding a pane means adding one entry here plus one `page.tsx`.
  */
 export const files: readonly WorkspaceFile[] = [
+  playgroundFile,
   {
     id: "about",
     label: "about.tsx",
     kind: "tsx",
-    href: "/",
+    href: "/about",
     title: "About",
     description:
       "Frontend Software Engineer and Founding Engineer building large-scale production web platforms, AI features and real-time systems.",
@@ -65,18 +84,8 @@ export const files: readonly WorkspaceFile[] = [
   },
 ];
 
-/** The playground is reachable but deliberately kept out of the file tree. */
-export const playgroundFile: WorkspaceFile = {
-  id: "playground",
-  label: "rally.tsx",
-  kind: "tsx",
-  href: "/playground",
-  title: "Playground",
-  description: "A game of Pong, a live chess rating, and what I do off the clock.",
-};
-
 const fileIndex: ReadonlyMap<PaneId, WorkspaceFile> = new Map(
-  [...files, playgroundFile].map((file) => [file.id, file]),
+  files.map((file) => [file.id, file]),
 );
 
 export function getFile(id: PaneId): WorkspaceFile | undefined {

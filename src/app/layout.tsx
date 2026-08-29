@@ -102,7 +102,17 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
       suppressHydrationWarning
     >
-      <head>
+      {/*
+        An explicit <head> is required here: `next/script` only hoists scripts
+        with a `src`, so an inline one placed outside <head> renders as a direct
+        child of <html> — invalid nesting, and its own hydration error.
+
+        `suppressHydrationWarning` covers this element's attributes because
+        browser extensions (LocatorJS, React DevTools and friends) stamp their
+        own attributes onto <head> before React hydrates. Nothing here renders
+        a dynamic attribute of its own, so there is no real mismatch to hide.
+      */}
+      <head suppressHydrationWarning>
         <script dangerouslySetInnerHTML={{ __html: bootFlagScript }} />
       </head>
       <body className="antialiased">
