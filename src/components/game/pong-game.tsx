@@ -39,9 +39,9 @@ export function PongGame() {
   return (
     <section
       aria-label="Pong"
-      className="border-line-soft bg-surface-raised flex h-full flex-col rounded-xl border p-5"
+      className="border-line-soft bg-surface-raised flex h-full flex-col rounded-xl border p-4"
     >
-      <header className="mb-4 flex items-center justify-between gap-4">
+      <header className="mb-3 flex items-center justify-between gap-4">
         <h2 className="text-ink font-display text-[13px] font-semibold">rally.tsx</h2>
 
         <div className="flex items-center gap-4 text-[11px]">
@@ -65,7 +65,7 @@ export function PongGame() {
         beside it on wide screens, instead of leaving a gap under a fixed
         height, but never collapses on short ones.
       */}
-      <div className="border-line-soft bg-surface-base relative min-h-[19rem] flex-1 overflow-hidden rounded-lg border">
+      <div className="border-line-soft bg-surface-base relative min-h-[15rem] flex-1 overflow-hidden rounded-lg border">
         <PongCanvas
           isRunning={phase === "playing"}
           roundKey={round}

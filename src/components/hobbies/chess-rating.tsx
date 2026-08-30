@@ -46,7 +46,7 @@ export function ChessRating() {
   const isLive = isSuccess && data !== null;
 
   return (
-    <div className="border-line-soft bg-surface-base mt-3 flex gap-4 rounded-md border p-3">
+    <div className="border-line-soft bg-surface-base mt-2.5 flex gap-4 rounded-md border p-2.5">
       <Stat
         value={String(rating)}
         className={isLive ? "text-mint" : undefined}

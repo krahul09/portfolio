@@ -7,7 +7,12 @@ export const profile = {
   name: "Rahul Kumar",
   firstName: "Rahul",
   headline: "Frontend Software Engineer",
-  roles: ["Founding Engineer", "Frontend Architect", "Software Engineer", "AI / LLM Systems Engineer"],
+  roles: [
+    "Founding Engineer",
+    "Frontend Architect",
+    "Software Engineer",
+    "AI / LLM Systems Engineer",
+  ],
   location: "Gurugram, India",
   locality: "Gurugram",
   region: "Haryana",

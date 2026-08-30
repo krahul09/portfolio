@@ -55,7 +55,7 @@ export function WorkspaceShell({ children }: { children: ReactNode }) {
             */}
             <div
               key={pathname}
-              className="animate-in flex min-h-full flex-col px-4 py-6 sm:px-6 sm:py-8"
+              className="animate-in flex min-h-full flex-col px-4 py-5 sm:px-6"
             >
               {children}
             </div>

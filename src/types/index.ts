@@ -80,6 +80,22 @@ export interface FootballClub {
   readonly accent: string;
 }
 
+export interface DifficultyBreakdown {
+  readonly solved: number;
+  readonly total: number;
+}
+
+export interface LeetcodeStats {
+  readonly solved: number;
+  readonly total: number;
+  readonly easy: DifficultyBreakdown;
+  readonly medium: DifficultyBreakdown;
+  readonly hard: DifficultyBreakdown;
+  readonly ranking: number | null;
+  /** False when the live request failed and the fallback is being shown. */
+  readonly isLive: boolean;
+}
+
 export interface Interest {
   readonly label: string;
   readonly icon: "sparkles" | "book";

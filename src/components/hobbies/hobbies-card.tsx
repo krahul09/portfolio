@@ -5,6 +5,7 @@ import type { Interest } from "@/types";
 import { Tag } from "@/components/ui/tag";
 import { ClubCrest } from "./club-crest";
 import { ChessRating } from "./chess-rating";
+import { LeetcodeStats } from "./leetcode-stats";
 
 const interestIcons = {
   sparkles: Sparkles,
@@ -13,8 +14,8 @@ const interestIcons = {
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="border-line-soft border-t pt-4 first:border-t-0 first:pt-0">
-      <h3 className="text-ink-faint mb-3 text-[10px] tracking-[0.12em] uppercase">
+    <section className="border-line-soft border-t pt-3 first:border-t-0 first:pt-0">
+      <h3 className="text-ink-faint mb-2 text-[10px] tracking-[0.12em] uppercase">
         {title}
       </h3>
       {children}
@@ -25,7 +26,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 /** Everything outside of work. Server-rendered apart from the live rating. */
 export function HobbiesCard() {
   return (
-    <aside className="border-line-soft bg-surface-raised flex h-full flex-col gap-5 rounded-xl border p-5">
+    <aside className="border-line-soft bg-surface-raised flex h-full flex-col gap-3 rounded-xl border p-4">
       <h2 className="text-ink-faint text-[12px] italic">
         {"// when I'm not shipping code"}
       </h2>
@@ -50,19 +51,27 @@ export function HobbiesCard() {
         </a>
       </Section>
 
-      <Section title="on the pitch">
-        <ul className="grid gap-2.5 sm:grid-cols-2">
+      <Section title="on leetcode">
+        {/* No Suspense boundary: this route is prerendered with ISR, so the
+            fetch resolves at build time and during background revalidation —
+            it never blocks a visitor's request, and the real numbers land in
+            the first HTML chunk rather than streaming in behind a skeleton. */}
+        <LeetcodeStats />
+      </Section>
+
+      <Section title="off the clock">
+        <ul className="grid gap-2 sm:grid-cols-2">
           {footballClubs.map((club) => (
             <li key={club.id}>
               {/* The accent is per-club, so it has to be an inline custom
                   property rather than a utility class. */}
               <div
-                className="border-line-soft bg-surface-base flex items-center gap-3 rounded-lg border p-3 transition-colors hover:border-(--club-accent)"
+                className="border-line-soft bg-surface-base flex items-center gap-2.5 rounded-lg border p-2 transition-colors hover:border-(--club-accent)"
                 style={{ "--club-accent": club.accent } as React.CSSProperties}
               >
-                <ClubCrest club={club} size={34} />
+                <ClubCrest club={club} size={30} />
                 <span className="min-w-0 leading-tight">
-                  <span className="text-ink block truncate text-[12.5px]">
+                  <span className="text-ink block truncate text-[12px]">
                     {club.name}
                   </span>
                   <span className="text-ink-faint block text-[10px]">
@@ -73,10 +82,8 @@ export function HobbiesCard() {
             </li>
           ))}
         </ul>
-      </Section>
 
-      <Section title="also into">
-        <ul className="flex flex-wrap gap-1.5">
+        <ul className="mt-2 flex flex-wrap gap-1.5">
           {interests.map((interest) => {
             const Icon = interestIcons[interest.icon];
             return (
