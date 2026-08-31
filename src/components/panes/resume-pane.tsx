@@ -1,6 +1,7 @@
 import { Download, ExternalLink } from "lucide-react";
 import { profile, resumeFileName, resumePath } from "@/data/profile";
 import { CodeLine, Token } from "@/components/ui/syntax";
+import { getResumeMeta } from "@/lib/resume-meta";
 
 /**
  * Resume viewer.
@@ -15,10 +16,14 @@ import { CodeLine, Token } from "@/components/ui/syntax";
  * visible rather than hidden behind a failed embed.
  */
 export function ResumePane() {
+  const meta = getResumeMeta();
+
   return (
     <div className="flex min-h-0 max-w-4xl flex-1 flex-col">
       <CodeLine>
-        <Token kind="comment">{"// resume.pdf — 1 page · 44 KB"}</Token>
+        <Token kind="comment">
+          {`// resume.pdf — ${meta.pages} page${meta.pages === 1 ? "" : "s"} · ${meta.sizeKb} KB`}
+        </Token>
       </CodeLine>
 
       <div className="border-line-soft bg-surface-raised mt-4 flex min-h-[20rem] flex-1 flex-col overflow-hidden rounded-lg border">
